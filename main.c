@@ -1,9 +1,11 @@
 #include "includes/philo.h"
 
-void	status(t_table *table, int id_philo, char *string)
+void	status(t_table *table, int id_philo, char *string, int c)
 {
 	pthread_mutex_lock(&table->std_o);
 	printf("%ld %d %s\n", curr_time() - table->t_start, id_philo, string);
+	if (c == 1)
+		printf("%ld %d %s\n", curr_time() - table->t_start, id_philo, "is eating");
 	pthread_mutex_unlock(&table->std_o);
 }
 

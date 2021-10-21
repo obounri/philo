@@ -40,7 +40,7 @@ typedef struct s_fork
 int         init_store_options(t_table *options, char **av);
 long int    curr_time();
 void        ft_error(char *error);
-void        status(t_table *table, int id_philo, char *string);
+void        status(t_table *table, int id_philo, char *string, int c);
 void        *routine(void *data);
 void        *check_death(void *data);
 #endif
