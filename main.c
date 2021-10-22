@@ -9,10 +9,9 @@ void	status(t_table *table, int id_philo, char *string, int c)
 	pthread_mutex_unlock(&table->std_o);
 }
 
-void	create_threads_mutex(t_table *table, t_philo *philos)
+void	create_threads_mutex(t_table *table, t_philo *philos, pthread_t *death)
 {
 	int i;
-    pthread_t death;
 
 	i = 0;
 	pthread_mutex_init(&table->std_o, NULL);
@@ -32,17 +31,18 @@ void	create_threads_mutex(t_table *table, t_philo *philos)
 		i++;
 		usleep(1000);
 	}
-	pthread_create(&death, NULL, &check_death, table);
+	pthread_create(death, NULL, &check_death, table);
 	i = 0;
 	while (i < table->n_philos)
 		pthread_join(philos[i++].philo, NULL);
-	pthread_join(death, NULL);
+	pthread_join(*death, NULL);
 }
 
 int		main(int ac, char **av)
 {
 	t_table table;
 	t_philo	*philos;
+    pthread_t death;
 	int i;
 
 	if (ac == 5 || ac == 6)
@@ -53,7 +53,7 @@ int		main(int ac, char **av)
 		philos = malloc(sizeof(t_philo) * table.n_philos);
 		table.forks = malloc(sizeof(t_fork) * table.n_philos);
 		table.philos = philos;
-		create_threads_mutex(&table, philos);
+		create_threads_mutex(&table, philos, &death);
 		pthread_mutex_destroy(&table.std_o);
 		while (i < table.n_philos)
 			pthread_mutex_destroy(&table.forks[i++].fork);
