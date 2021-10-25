@@ -29,7 +29,7 @@ void	create_threads_mutex(t_table *table, t_philo *philos, pthread_t *death)
 		philos[i].n_ate = 0;
 		pthread_create(&philos[i].philo, NULL, &routine, &philos[i]);
 		i++;
-		usleep(1000);
+		usleep(100);
 	}
 	pthread_create(death, NULL, &check_death, table);
 	i = 0;
