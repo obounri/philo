@@ -12,7 +12,9 @@ typedef struct s_table
 {
     struct s_philo  *philos;
     struct s_fork   *forks;
+	pthread_t	    count;
     pthread_mutex_t std_o;
+    pthread_mutex_t philo_dead;
 	long int t_start;
     int n_philos;
     int t_die;
@@ -26,6 +28,7 @@ typedef struct s_philo
 {
     struct s_table *table;
     pthread_t philo;
+    // pthread_mutex_t ate;
     long int last_t_ate;
     int id_philo;
     int n_ate;
@@ -43,4 +46,5 @@ void        ft_error(char *error);
 void        status(t_table *table, int id_philo, char *string, int c);
 void        *routine(void *data);
 void        *check_death(void *data);
+
 #endif
