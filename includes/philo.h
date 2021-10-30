@@ -28,7 +28,6 @@ typedef struct s_philo
 {
     struct s_table *table;
     pthread_t philo;
-    // pthread_mutex_t ate;
     long int last_t_ate;
     int id_philo;
     int n_ate;

@@ -14,12 +14,6 @@ void     *check_death(void *data)
             philo->table->death = 0;
             return (NULL);
         }
-        // if (philo->table->philos[philo->table->n_philos - 1].n_ate == philo->table->n_must_eat)
-        // {
-        //     philo->table->death = 0;
-        //     pthread_mutex_unlock(&philo->table->philo_dead);
-        //     return (NULL);
-        // }
         usleep(philo->table->t_sleep + philo->table->t_eat);
     }
     return (NULL);
@@ -46,7 +40,6 @@ void     ph_eat(t_philo  *philo)
     usleep(philo->table->t_eat * 1000);
     philo->n_ate += 1;
     unlock_forks(philo);
-	// pthread_mutex_unlock(&philo->ate);
 }
 
 void     ph_sleep(t_philo  *philo)
@@ -63,7 +56,7 @@ void	*routine(void *data)
 	philo = (t_philo *)data;
     pthread_create(&death, NULL, &check_death, philo);
     pthread_detach(death);
-	while (1)
+	while (philo->table->death)
 	{
         ph_eat(philo);
         ph_sleep(philo);

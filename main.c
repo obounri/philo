@@ -19,7 +19,7 @@ void	*eat_count(void *data)
 	int ate;
 	int i;
 
-	table = (t_table *)table;
+	table = (t_table *)data;
 	philos = table->philos;
 	ate = 0;
 	while (ate != table->n_philos)
@@ -34,6 +34,7 @@ void	*eat_count(void *data)
 		}
 	}
 	pthread_mutex_unlock(&table->philo_dead);
+    table->death = 0;
 	return (NULL);
 }
 
@@ -56,20 +57,18 @@ void	create_threads_mutex(t_table *table, t_philo *philos)
 		philos[i].table = table;
 		philos[i].id_philo = i + 1;
 		philos[i].n_ate = 0;
-		// pthread_mutex_init(&philos[i].ate, NULL);
-		// pthread_mutex_lock(&philos[i].ate);
 		pthread_create(&philos[i].philo, NULL, &routine, &philos[i]);
 		pthread_detach(philos[i].philo);
 		i++;
 		usleep(100);
 	}
-	// if (table->n_must_eat > 0)
-	// {
-	// 	pthread_create(&table->count, NULL, &eat_count, table);
-	// 	pthread_detach(table->count);
-	// }
+	if (table->n_must_eat > 0)
+	{
+		pthread_create(&table->count, NULL, &eat_count, table);
+		pthread_detach(table->count);
+	}
 }
-// check n_must_eat;
+
 int		main(int ac, char **av)
 {
 	t_table table;
