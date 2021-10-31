@@ -6,11 +6,33 @@
 /*   By: obounri <obounri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 17:13:56 by obounri           #+#    #+#             */
-/*   Updated: 2021/10/31 17:16:14 by obounri          ###   ########.fr       */
+/*   Updated: 2021/10/31 18:44:37 by obounri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	*eat_count(void *data)
+{
+	t_table	*table;
+	t_philo	*philos;
+	int		ate;
+	int		i;
+
+	table = (t_table *)data;
+	philos = table->philos;
+	ate = 0;
+	while (ate < table->n_must_eat)
+	{
+		i = 0;
+		while (i < table->n_philos)
+			pthread_mutex_lock(&philos[i++].ate);
+		ate++;
+	}
+	table->death = 0;
+	pthread_mutex_unlock(&table->philo_dead);
+	return (NULL);
+}
 
 void	*check_death(void *data)
 {
@@ -23,8 +45,8 @@ void	*check_death(void *data)
 		if (curr_time() - philo->last_t_ate > philo->table->t_die + 5)
 		{
 			status(philo->table, philo->id_philo, "died", 0);
-			pthread_mutex_unlock(&philo->table->philo_dead);
 			philo->table->death = 0;
+			pthread_mutex_unlock(&philo->table->philo_dead);
 			return (NULL);
 		}
 		usleep(philo->table->t_sleep + philo->table->t_eat);
@@ -42,6 +64,7 @@ void	ph_eat(t_philo	*philo)
 	philo->last_t_ate = curr_time();
 	usleep(philo->table->t_eat * 1000);
 	philo->n_ate += 1;
+	pthread_mutex_unlock(&philo->ate);
 	pthread_mutex_unlock(&philo->table->forks[philo->id_philo - 1].fork);
 	pthread_mutex_unlock
 		(&philo->table->forks[philo->id_philo % philo->table->n_philos].fork);
