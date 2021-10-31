@@ -13,11 +13,10 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-# include "../utils/libft/libft.h"
 # include <stdlib.h>
 # include <pthread.h>
 # include <stdio.h>
-# include "unistd.h"
+# include <unistd.h>
 # include <sys/time.h>
 
 typedef struct s_table
@@ -51,6 +50,10 @@ typedef struct s_fork
 	pthread_mutex_t	fork;
 }	t_fork;
 
+
+int			ft_atoi(const char *str);
+int			ft_isdigit(int c);
+void		ft_putstr_fd(char *s, int fd);
 int			init_store_options(t_table *options, char **av);
 long int	curr_time(void);
 void		ft_error(char *error);
