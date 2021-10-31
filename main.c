@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obounri <obounri@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/31 17:10:41 by obounri           #+#    #+#             */
+/*   Updated: 2021/10/31 17:38:20 by obounri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/philo.h"
 
 void	status(t_table *table, int id_philo, char *string, int c)
@@ -7,17 +19,18 @@ void	status(t_table *table, int id_philo, char *string, int c)
 	{
 		printf("%ld %d %s\n", curr_time() - table->t_start, id_philo, string);
 		if (c == 1)
-			printf("%ld %d %s\n", curr_time() - table->t_start, id_philo, "is eating");
+			printf("%ld %d %s\n",
+				curr_time() - table->t_start, id_philo, "is eating");
 	}
 	pthread_mutex_unlock(&table->std_o);
 }
 
 void	*eat_count(void *data)
 {
-	t_table *table;
-	t_philo *philos;
-	int ate;
-	int i;
+	t_table	*table;
+	t_philo	*philos;
+	int		ate;
+	int		i;
 
 	table = (t_table *)data;
 	philos = table->philos;
@@ -34,23 +47,20 @@ void	*eat_count(void *data)
 		}
 	}
 	pthread_mutex_unlock(&table->philo_dead);
-    table->death = 0;
+	table->death = 0;
 	return (NULL);
 }
 
 void	create_threads_mutex(t_table *table, t_philo *philos)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	pthread_mutex_init(&table->std_o, NULL);
 	pthread_mutex_init(&table->philo_dead, NULL);
 	pthread_mutex_lock(&table->philo_dead);
 	while (i < table->n_philos)
-	{
-		table->forks[i].used = 0; 
 		pthread_mutex_init(&table->forks[i++].fork, NULL);
-	}
 	i = 0;
 	while (i < table->n_philos)
 	{
@@ -69,11 +79,11 @@ void	create_threads_mutex(t_table *table, t_philo *philos)
 	}
 }
 
-int		main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_table table;
+	t_table	table;
 	t_philo	*philos;
-	int i;
+	int		i;
 
 	if (ac == 5 || ac == 6)
 	{

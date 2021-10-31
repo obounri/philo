@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_store.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obounri <obounri@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/31 17:20:53 by obounri           #+#    #+#             */
+/*   Updated: 2021/10/31 17:22:51 by obounri          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philo.h"
 
 void	ft_error(char *error)
@@ -6,9 +18,9 @@ void	ft_error(char *error)
 	exit(EXIT_FAILURE);
 }
 
-int		ft_isnumber(char *str)
+int	ft_isnumber(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -31,9 +43,9 @@ void	store_arg(t_table *options, char *opt)
 		options->n_must_eat = ft_atoi(opt);
 }
 
-int		init_store_options(t_table *options, char **av)
+int	init_store_options(t_table *options, char **av)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	options->n_philos = -1;
@@ -54,10 +66,10 @@ int		init_store_options(t_table *options, char **av)
 	return (1);
 }
 
-long int	curr_time()
+long int	curr_time(void)
 {
-	struct 		timeval time;
-	long int	curr;
+	struct timeval	time;
+	long int		curr;
 
 	gettimeofday(&time, NULL);
 	curr = time.tv_sec * 1000 + time.tv_usec / 1000;
