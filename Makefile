@@ -14,7 +14,7 @@ $(NAME): $(HEADER) main.c $(UTILS)
 clean:
 	rm -f $(NAME)
 
-fclean: clean
+fclean:
 	rm -f $(NAME)
 
 re: fclean all

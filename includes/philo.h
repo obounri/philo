@@ -6,7 +6,7 @@
 /*   By: obounri <obounri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 17:23:02 by obounri           #+#    #+#             */
-/*   Updated: 2021/10/31 18:20:58 by obounri          ###   ########.fr       */
+/*   Updated: 2021/11/04 08:17:16 by obounri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_fork
 {
 	pthread_mutex_t	fork;
 }	t_fork;
-
 
 int			ft_atoi(const char *str);
 int			ft_isdigit(int c);

@@ -6,7 +6,7 @@
 /*   By: obounri <obounri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 17:10:41 by obounri           #+#    #+#             */
-/*   Updated: 2021/10/31 18:52:41 by obounri          ###   ########.fr       */
+/*   Updated: 2021/11/04 20:10:19 by obounri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	status(t_table *table, int id_philo, char *string, int c)
 {
 	pthread_mutex_lock(&table->std_o);
-	if (table->death)
+	if (table->death && table->n_must_eat != 0)
 	{
 		printf("%ld %d %s\n", curr_time() - table->t_start, id_philo, string);
 		if (c == 1)
