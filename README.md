@@ -12,8 +12,12 @@ is very inconvenient, so the philosophers will eat with two forks, one for each 
 (To avoid philosophers duplicating forks, you should protect the forks state with a
 mutex for each of them.)
 
-• The program should take the following arguments: number_of_philosophers time_to_die
-time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
+• The program should take the following arguments: 
+number_of_philosophers 
+time_to_die
+time_to_eat 
+time_to_sleep 
+[number_of_times_each_philosopher_must_eat]
 ( if a philosopher doesn’t start eating ’time_to_die’
 milliseconds after starting their last meal or the beginning of the simulation,
 it dies)
@@ -22,11 +26,7 @@ it dies)
 with the philosopher number and timestamp_in_ms the current timestamp in milliseconds):
 
 ◦ timestamp_in_ms X has taken a fork
-
 ◦ timestamp_in_ms X is eating
-
 ◦ timestamp_in_ms X is sleeping
-
 ◦ timestamp_in_ms X is thinking
-
 ◦ timestamp_in_ms X died
