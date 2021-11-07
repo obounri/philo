@@ -3,7 +3,9 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 HEADER = includes/philo.h
 
-UTILS = utils/*.c
+UTILS = utils/init_store.c \
+utils/routine.c \
+utils/utils.c
 
 all: $(NAME)
 
