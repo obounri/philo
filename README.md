@@ -25,7 +25,7 @@ it dies)
 • Any change of status of a philosopher must be written as follows (with X replaced
 with the philosopher number and timestamp_in_ms the current timestamp in milliseconds):
 
-◦ timestamp_in_ms X has taken a fork
+◦ timestamp_in_ms X has taken a fork\n
 ◦ timestamp_in_ms X is eating
 ◦ timestamp_in_ms X is sleeping
 ◦ timestamp_in_ms X is thinking
